@@ -7,7 +7,7 @@ describe( 'Form', () => {
     let component: FormRegister;
 
     beforeEach( () => {
-       component = new FormRegister( new FormBuilder());
+       component = new FormRegister( new FormBuilder() );
     });
 
     it ('should create form with two inputs', () => {
@@ -17,6 +17,21 @@ describe( 'Form', () => {
 
     });
 
+    it ('email is required', () => {
+
+        const controler = component.form.get('email');
+        controler.setValue('');
+        expect (controler.valid).toBeFalsy();
+
+    });
+
+    it ('email should valid', () => {
+
+        const controler = component.form.get('email');
+        controler.setValue('pepe@gmail.com');
+        expect (controler.valid).toBeTruthy();
+
+    });
 
 
 });
