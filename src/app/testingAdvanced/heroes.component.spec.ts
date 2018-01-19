@@ -2,6 +2,7 @@ import {HeroesComponent} from './heroes.component';
 import {HeroesService} from './heroes.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
+import 'rxjs/add/observable/empty';
 
 describe('Testing component heroe', () => {
 
@@ -26,5 +27,18 @@ describe('Testing component heroe', () => {
         expect( component.heroes.length ).toBeGreaterThan(0);
     });
 
+
+    it('Should call service when add heroe', () => {
+
+        const heroes = ['superman', 'spiderman'];
+
+        const spy = spyOn( service, 'addHeroe' ).and.callFake( (heroe) => {
+            return Observable.empty();
+        });
+
+        component.addHeroe();
+
+        expect( spy ).toHaveBeenCalled();
+    });
 
 });
