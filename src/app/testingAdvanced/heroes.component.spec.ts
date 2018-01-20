@@ -41,4 +41,14 @@ describe('Testing component heroe', () => {
         expect( spy ).toHaveBeenCalled();
     });
 
+    it('Should add heroe in array heroes', () => {
+
+        const heroe = {id: 1, name: 'superman'};
+
+        const spy = spyOn( service, 'addHeroe' ).and.returnValue( Observable.from([heroe]) );
+
+        component.addHeroe();
+
+        expect( component.heroes.indexOf(heroe) ).toBeGreaterThanOrEqual(0);
+    });
 });
