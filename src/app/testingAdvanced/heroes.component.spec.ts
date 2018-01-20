@@ -3,6 +3,7 @@ import {HeroesService} from './heroes.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/observable/empty';
+import 'rxjs/add/observable/throw';
 
 describe('Testing component heroe', () => {
 
@@ -50,5 +51,17 @@ describe('Testing component heroe', () => {
         component.addHeroe();
 
         expect( component.heroes.indexOf(heroe) ).toBeGreaterThanOrEqual(0);
+    });
+
+
+    it('if addHeroe is fail, message should be equal to error ', () => {
+
+        const error = 'No se pudo añadir un heroe';
+
+        spyOn( service, 'addHeroe' ).and.returnValue( Observable.throw(error) );
+
+        component.addHeroe();
+
+        expect( component.errors ).toBe(error);
     });
 });
