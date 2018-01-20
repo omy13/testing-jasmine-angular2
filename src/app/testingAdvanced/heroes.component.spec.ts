@@ -64,4 +64,29 @@ describe('Testing component heroe', () => {
 
         expect( component.errors ).toBe(error);
     });
+
+
+    it('should call service when remove hero', () => {
+
+        spyOn(window, 'confirm').and.returnValue(true);
+
+        const spy = spyOn( service, 'removeHeroe' ).and.returnValue( Observable.empty() );
+
+        component.removeHeroe('1');
+
+        expect( spy ).toHaveBeenCalledWith('1');
+    });
+
+
+
+    it('should not call service when remove hero', () => {
+
+        spyOn(window, 'confirm').and.returnValue(false);
+
+        const spy = spyOn( service, 'removeHeroe' ).and.returnValue( Observable.empty() );
+
+        component.removeHeroe('1');
+
+        expect( spy ).not.toHaveBeenCalledWith('1');
+    });
 });
